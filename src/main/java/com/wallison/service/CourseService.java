@@ -12,6 +12,7 @@ import jakarta.validation.constraints.Positive;
 
 import com.wallison.dto.CourseDTO;
 import com.wallison.dto.mapper.CourseMapper;
+import com.wallison.enums.Category;
 import com.wallison.exception.RecordNotFoundException;
 
 import java.util.List;
@@ -49,7 +50,7 @@ public class CourseService {
         return courseRepository.findById(id)
                 .map(recordFound -> {
                     recordFound.setName(course.name());
-                    recordFound.setCategory(course.category());
+                    recordFound.setCategory(Category.FRONT_END);
                     return courseMapper.toDTO(courseRepository.save(recordFound));
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
